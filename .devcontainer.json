@@ -11,10 +11,14 @@
 				"ms-python.flake8",
 				"ms-python.pylint",
 				"eamodio.gitlens",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"ms-azuretools.vscode-docker"
 			]
         }
     },
+    "mounts": [
+        "source=./:/workspace:cached"
+    ],
     "forwardPorts": [
         3000
     ]

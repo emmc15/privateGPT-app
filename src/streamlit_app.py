@@ -1,10 +1,11 @@
-from dotenv import load_dotenv
-import os
-import streamlit as st
-import requests
-from typing import List
 import json
+import os
 import socket
+from typing import List
+
+import requests
+import streamlit as st
+from dotenv import load_dotenv
 from urllib3.connection import HTTPConnection
 
 API_BASE_URL = os.environ.get("API_BASE_URL")
@@ -14,8 +15,9 @@ load_dotenv()
 embeddings_model_name = os.environ.get("EMBEDDINGS_MODEL_NAME")
 persist_directory = os.environ.get("PERSIST_DIRECTORY")
 
-from constants import CHROMA_SETTINGS
 import chromadb
+
+from constants import CHROMA_SETTINGS
 
 
 def list_of_collections():

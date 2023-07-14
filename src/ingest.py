@@ -1,31 +1,26 @@
 #!/usr/bin/env python3
-import os
 import glob
-from typing import List
-from dotenv import load_dotenv
+import os
 from multiprocessing import Pool
-from tqdm import tqdm
+from typing import List
 
-from langchain.document_loaders import (
-    CSVLoader,
-    EverNoteLoader,
-    PyMuPDFLoader,
-    TextLoader,
-    UnstructuredEmailLoader,
-    UnstructuredEPubLoader,
-    UnstructuredHTMLLoader,
-    UnstructuredMarkdownLoader,
-    UnstructuredODTLoader,
-    UnstructuredPowerPointLoader,
-    UnstructuredWordDocumentLoader,
-)
-
+from dotenv import load_dotenv
+from langchain.docstore.document import Document
+from langchain.document_loaders import (CSVLoader, EverNoteLoader,
+                                        PyMuPDFLoader, TextLoader,
+                                        UnstructuredEmailLoader,
+                                        UnstructuredEPubLoader,
+                                        UnstructuredHTMLLoader,
+                                        UnstructuredMarkdownLoader,
+                                        UnstructuredODTLoader,
+                                        UnstructuredPowerPointLoader,
+                                        UnstructuredWordDocumentLoader)
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.docstore.document import Document
-from constants import CHROMA_SETTINGS
+from tqdm import tqdm
 
+from constants import CHROMA_SETTINGS
 
 load_dotenv()
 
@@ -86,7 +81,7 @@ def load_single_document(file_path: str) -> List[Document]:
     if ext in LOADER_MAPPING:
         loader_class, loader_args = LOADER_MAPPING[ext]
         loader = loader_class(file_path, **loader_args)
-        return loader.load()
+        return loader.load().replace("\n", " ")
 
     raise ValueError(f"Unsupported file extension '{ext}'")
 

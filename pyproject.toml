@@ -24,12 +24,16 @@ tqdm = "^4.65.0"
 gunicorn = "^20.1.0"
 streamlit = "^1.24.1"
 python-multipart = "^0.0.6"
+torch = "!=2.0.1"
+sentence-transformers = "^2.2.2"
+
 
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
 pylint = "^2.17.4"
 flake8 = "^6.0.0"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core"]
